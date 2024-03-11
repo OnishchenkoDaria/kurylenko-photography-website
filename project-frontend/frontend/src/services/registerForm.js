@@ -74,11 +74,10 @@ const getUser = async () => {
 const getRole = async() => await axios.get(baseUrl + 'get-role/').then(response => response.data)
 
 const logOut = async () => {
-    console.log('1')
     const result = axios.post(baseUrl+'log-out')
-    console.log('2')
+   
     try{
-        console.log('3')
+       
         console.log((await result).data.message)
         console.log('Logged out');
         return true
