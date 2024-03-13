@@ -71,7 +71,17 @@ const getUser = async () => {
     }
 }
 
-const getRole = async() => await axios.get(baseUrl + 'get-role/').then(response => response.data)
+const getRole = async() => {
+    const result = await axios.get(baseUrl + 'get-role/')
+    try{
+        const role = result.data.role
+        console.log("Role: ", role)
+        return role
+    }
+    catch(error){
+        console.error('Get Role error: ', error)
+    }
+}
 
 const logOut = async () => {
     const result = axios.post(baseUrl+'log-out')
