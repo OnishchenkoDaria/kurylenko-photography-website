@@ -4,30 +4,52 @@ import Table from 'react-bootstrap/Table';
 
 const PaymentTable = () => {
   const [tableData, setTableData] = useState([]);
+  //for timer
+  const [countdown, setCountdown] = useState(5); // sets the default timer by 5 seconds
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await userService.paymentTable();
-        console.log(result);
-        setTableData(result);
-      } catch (err) {
-        console.error('Error fetching data:', err);
-      }
-    };
-
+    
+      const fetchData = async () => {
+        try {
+          //calling the server to fetch user transactions data
+          const result = await userService.paymentTable();
+          console.log(result);
+          setTableData(result);
+        } catch (err) {
+          console.error('Error fetching data:', err);
+        }
+      };
+    //intial call by default
     fetchData();
+    
+    //for auto refreshment every 5 seconds
+    const interval = setInterval(() => {
+      setCountdown(prevCountdown => {
+        if(prevCountdown === 1) {
+          fetchData() // callig when timer comes to 1 sec left
+          return 5
+        } else {
+          return prevCountdown -1 
+        }
+      })
+    }, 1000 /* renew for every 1 seconds */)
+
+    //clear interval
+    return () => clearInterval(interval)
   }, []); // Empty dependency array ensures useEffect runs only once
 
   return (
     <>
       <div style={{textAlign: 'center'}}>
-        <p>Processing data from liqpay server may take some time, refresh page periodically</p>
         <h2>Your Orders</h2>
 
         {tableData.length === 0 ? (
-          <p>No orders yet</p>
+          <>
+            <p>No orders yet</p>
+            <p>Refreshing into... {countdown}</p>
+          </>
         ) : (
+          <>
           <Table>
             <thead>
               <tr>
@@ -46,6 +68,8 @@ const PaymentTable = () => {
               ))}
             </tbody>
           </Table>
+          <p>Refreshing into... {countdown}</p>
+          </>
         )}
       </div>
     </>
