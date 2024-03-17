@@ -80,7 +80,7 @@ const LoginForm = () => {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Row>
-            <Col lg={10}>
+            <Col xs={10}>
               <Form.Control
                 type={type}
                 name="password"
@@ -91,7 +91,7 @@ const LoginForm = () => {
                 required
               />
             </Col>
-            <Col>
+            <Col xs={1}>
               <span
                 class="flex justify-around items-center"
                 onClick={toggleVisibility}
