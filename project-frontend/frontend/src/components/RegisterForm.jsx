@@ -5,17 +5,34 @@ import userService from "../services/registerForm";
 import { useNavigate } from "react-router-dom";
 import PathConstants from "../routes/pathConstants";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
+import { Icon } from "react-icons-kit";
+import { eyeOff } from "react-icons-kit/feather/eyeOff";
+import { eye } from "react-icons-kit/feather/eye";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
-  const[message, setMessage]=useState()
+  const [message, setMessage] = useState();
+  const [type, setType] = useState("password");
+  const [icon, setIcon] = useState(eyeOff);
 
   const [formInput, setFormInput] = useState({
     name: "",
     email: "",
     password: "",
   });
+
+  const toggleVisibility = () => {
+    if (type == "password") {
+      setIcon(eye);
+      setType("notpassword");
+    } else {
+      setIcon(eyeOff);
+      setType("password");
+    }
+  };
 
   const handleChange = (par) => {
     const { name, value } = par.target;
@@ -43,10 +60,10 @@ const RegistrationForm = () => {
       //const response = await userService.addUser(UserInfo) --
       //does not work as addUser call does not return anything (neither in try, nor in catch)
       const feedback = await userService.addUser(UserInfo);
-      if (feedback.success===true) {
+      if (feedback.success === true) {
         navigate(PathConstants.ACCOUNT);
       } else {
-        setMessage(feedback.message)
+        setMessage(feedback.message);
       }
       console.log("try executed");
       //
@@ -70,24 +87,28 @@ const RegistrationForm = () => {
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Name</Form.Label>
-          <Form.Control
-            name="name"
-            value={formInput.name}
-            onChange={handleChange}
-            placeholder="Name"
-            required
-          />
+          <Col lg={10}>
+            <Form.Control
+              name="name"
+              value={formInput.name}
+              onChange={handleChange}
+              placeholder="Name"
+              required
+            />
+          </Col>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control
-            name="email"
-            value={formInput.email}
-            onChange={handleChange}
-            placeholder="Email"
-            required
-          />
+          <Col lg={10}>
+            <Form.Control
+              name="email"
+              value={formInput.email}
+              onChange={handleChange}
+              placeholder="Email"
+              required
+            />
+          </Col>
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text>
@@ -95,20 +116,36 @@ const RegistrationForm = () => {
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control
-            name="password"
-            value={formInput.password}
-            onChange={handleChange}
-            placeholder="Password"
-            autoComplete="off"
-            required
-          />
+          <Row>
+            <Col lg={10}>
+              <Form.Control
+                type={type}
+                name="password"
+                value={formInput.password}
+                onChange={handleChange}
+                placeholder="Password"
+                autoComplete="off"
+                required
+              />
+            </Col>
+            <Col>
+              <span
+                class="flex justify-around items-center"
+                onClick={toggleVisibility}
+              >
+                <Icon class="absolute mr-10" icon={icon} size={25} />
+              </span>
+            </Col>
+          </Row>
         </Form.Group>
         <Button variant="dark" type="submit">
           Submit
         </Button>
-        <p className="mt-3">Have an account already?<br/>
-        <Link to={PathConstants.LOGIN}>Log in now</Link></p>
+        <p className="mt-3">
+          Have an account already?
+          <br />
+          <Link to={PathConstants.LOGIN}>Log in now</Link>
+        </p>
       </Form>
       {message && <p className="text-danger">{message}*</p>}
     </>
