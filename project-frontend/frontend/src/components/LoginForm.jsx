@@ -2,16 +2,13 @@ import { useState } from "react";
 import userService from "../services/registerForm";
 import { useNavigate } from "react-router-dom";
 import PathConstants from "../routes/pathConstants";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import "bootstrap/dist/css/bootstrap.min.css";
+
+// inout fields icons
 import { Link } from "react-router-dom";
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import { user } from "react-icons-kit/feather/user";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 const LoginForm = () => {
   const navigate = useNavigate();
