@@ -6,6 +6,11 @@ import PathConstants from '../routes/pathConstants';
 import { useNavigate } from 'react-router-dom'
 import back_pic from '../assets/photo1.jpg'
 
+//icons
+import { eyeOff } from "react-icons-kit/feather/eyeOff";
+import { eye } from "react-icons-kit/feather/eye";
+import { user } from "react-icons-kit/feather/user";
+
 const Login = () => {
 
   const formInputData = [ 
@@ -13,14 +18,21 @@ const Login = () => {
       name: 'email',
       placeholder: 'user@email.com',
       label: 'Email address',
-      required: true
+      required: true,
+      hasIcon: true,
+      icon: user,
+      isTogglable: false
     },
     {
       name: 'password',
       placeholder: 'password',
       label: 'Password',
-      required: true
-    }];
+      required: true,
+      hasIcon: true,
+      icon: eye,
+      isTogglable: true
+    },
+  ];
 
   
   const navigate = useNavigate();
