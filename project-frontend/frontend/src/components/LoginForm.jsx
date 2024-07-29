@@ -46,6 +46,8 @@ const LoginForm = () => {
       }
       const UserInfo = new newUser();
 
+      console.log(UserInfo);
+
       const feedback = await userService.loginUser(UserInfo);
       userService.getUser();
       if (feedback.success === true) {

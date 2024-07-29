@@ -1,48 +1,55 @@
 import { useState } from "react";
 import { Icon } from "react-icons-kit";
-import { user } from "react-icons-kit/feather/user";
+import userService from "../services/registerForm";
+import { useNavigate } from "react-router-dom";
+import PathConstants from "../routes/pathConstants";
 
+function AbstractForm(props, type) {
 
-function AbstractForm(props) {
-
+  //console.log(props.data.map(obj => obj.name));
+    const [message, setMessage] = useState();
+    const navigate = useNavigate();
     const [inputFields, setInputFields] = useState(
-        [{
-            name: '',
-            placeholder: '',
-            required: false,
-            value: ''
-        }]
+      [props.data.map(obj => obj.name)]
     );
-    const [icon, setIcon] = useState(null);
-
-
-    const toggleVisibility = () => {
-      if (type == "password") {
-        setIcon(eye);
-        setType("notpassword");
-      } else {
-        setIcon(eyeOff);
-        setType("password");
-      }
-    };
 
     const handleChange = (index, event) => {
-        let data = [...inputFields];
-        data[index][event.target.name] = event.target.value;
-        setInputFields(data);
+      setInputFields({...inputFields, [event.target.name] : event.target.value});
     }
 
-    console.log(props);
-    console.log(props.data[0].name);
-    console.log(props.data[1].name);
+    const handleFormSubmit = async (par) => {
+      try{
+        par.preventDefault();
 
-    console.log('has icon: ', props.data[0].hasIcon);
+        function newUser(){
+          //props.data.forEact((element) => this.props.data[index].name = formInput.props.data[index].name)
+          props.data.forEach((attribute) => {
+            this[attribute.name] = inputFields[attribute.name];
+          })
+        }
+
+        const UserInfo = new newUser();
+
+        console.log(UserInfo);
+
+        const feedback = await userService[props.type](UserInfo);
+        
+        userService.getUser();
+        if (feedback.success === true) {
+          navigate(PathConstants.ACCOUNT);
+        } else {
+          setMessage(feedback.message);
+        }
+      }catch(err){
+        console.log("Error: ", err);
+      }
+    }
 
     return(
-      <div className="md:flex md:items-center mb-6">
+      <form onSubmit={handleFormSubmit} className="w-full max-w-sm pt-6 text-center">
         {props.data.map((input, index) => (     
         <div key={index}>
-          <label className="block text-white tracking-wider mb-2 md:text-left">{props.data[index].name}</label>
+          <label className="block text-white tracking-wider mb-2 md:text-left">{props.data[index].label}</label>
 
           <div className="md:flex md:items-center mb-6">
             <input
@@ -50,8 +57,9 @@ function AbstractForm(props) {
               name={props.data[index].name}
               placeholder={props.data[index].placeholder}
               required={props.data[index].required}
-              value = {input.email}
+              value = {inputFields[props.data[index].name] || ''}
               onChange={event => handleChange(index, event)}
+              autoComplete={props.data[index].autoComplete}
             />
 
           {props.data[index].hasIcon && (
@@ -71,7 +79,23 @@ function AbstractForm(props) {
           </div> 
         </div>
         ))}
-      </div>
+
+        <div className="flex justify-around items-center m-3">
+          <button className="tracking-wider text-white text-lg shadow hover:outline py-2 px-4 rounded" type="submit">
+            Submit
+          </button>
+        </div>
+
+        {message && 
+          <div className="text-left bg-gradient-to-r from-red-300 border-l-4 border-red-800 text-red-800 p-3" role="alert">
+          <p className="text-lg tracking-wide">
+            <span className="font-bold">Error: </span>
+            <span className="italic">{message}</span>
+          </p>
+        </div>
+        }
+
+      </form>
     )
 }
 
