@@ -4,7 +4,7 @@ import userService from "../services/registerForm";
 import { useNavigate } from "react-router-dom";
 import PathConstants from "../routes/pathConstants";
 
-function AbstractForm(props, type) {
+function AbstractForm(props) {
 
   //console.log(props.data.map(obj => obj.name));
     const [message, setMessage] = useState();
