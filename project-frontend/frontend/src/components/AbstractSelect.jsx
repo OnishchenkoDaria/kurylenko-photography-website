@@ -1,43 +1,36 @@
 import React, { useEffect, useState } from 'react';
 
-/*[
-    {
-        type: 'radio',
-        label: 'label',
-        name: 'name',
-        value: 2,
-        onChange: ???
-    },...{}
-]*/
-
 //make the buttonPressed marker relay on the name of the input 
 
-function AbstractSelect(props) {
+function AbstractSelect(props, {changeState} ) {
 
-  const [inputData, setInputData] = useState(0);
   const [total, setTotal] = useState(0);
+  const [inputData, setInputData] = useState(0);
   
   useEffect(() => {
     setTotal(Number(inputData));
   });
 
-  const handleChoice = (index, event) => {
+  function handleChoice (index, event) {
+    let newInputData = inputData;
     if(event.target.type === 'radio'){
-      setInputData(Number(event.target.value));
-      console.log(inputData);
+      newInputData = event.target.value;
     }
     else if(event.target.type === 'checkbox'){
       if(event.target.checked){
-        setInputData(Number(inputData) + Number(event.target.value));
+        newInputData = Number(inputData) + Number(event.target.value);
       }
       else{
-        setInputData(Number(inputData) - Number(event.target.value));
+        newInputData = Number(inputData) - Number(event.target.value);
       }  
     }
     else{
       console.log('unexpected input type occured');
       return;
     }
+    setInputData(Number(newInputData))
+    console.log('i', props.index);
+    props.changeState(props.index, newInputData);
   }
     
   return(
@@ -50,15 +43,14 @@ function AbstractSelect(props) {
             id={props.data[index].id}
             name={props.data[index].name}
             value={props.data[index].value}
-            onChange={event => handleChoice(index, event)}
+            onChange={(event) =>  handleChoice(index, event)}
           />
           <label htmlFor={props.data[index].id}>
             {props.data[index].label}
           </label>
         </div>
-          
       ))}
-      <h1>Total: {total}</h1>
+    <p>Total: {total}</p>
     </form>
   );
 };
