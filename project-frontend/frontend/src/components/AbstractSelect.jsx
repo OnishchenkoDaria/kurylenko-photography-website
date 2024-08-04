@@ -14,7 +14,7 @@ function AbstractSelect(props, {changeState} ) {
   function handleChoice (index, event) {
     let newInputData = inputData;
     if(event.target.type === 'radio'){
-      newInputData = event.target.value;
+      newInputData = Number(event.target.value);
     }
     else if(event.target.type === 'checkbox'){
       if(event.target.checked){
@@ -28,16 +28,15 @@ function AbstractSelect(props, {changeState} ) {
       console.log('unexpected input type occured');
       return;
     }
-    setInputData(Number(newInputData))
-    console.log('i', props.index);
-    props.changeState(props.index, newInputData);
+    setInputData(newInputData);
+    props.changeState(props.index, newInputData, 0);
   }
     
   return(
     <form className="w-full max-w-sm pt-6 text-center">
-      <h1>{props.header}</h1>
+      <h1 className='mb-3'>{props.header}</h1>
       {props.data.map((input, index) => (
-        <div key={index} className="text-left">
+        <div key={index} className="text-left m-2">
           <input
             type={props.data[index].type}
             id={props.data[index].id}
@@ -45,12 +44,12 @@ function AbstractSelect(props, {changeState} ) {
             value={props.data[index].value}
             onChange={(event) =>  handleChoice(index, event)}
           />
-          <label htmlFor={props.data[index].id}>
+          <label htmlFor={props.data[index].id} className='ml-2'>
             {props.data[index].label}
           </label>
         </div>
       ))}
-    <p>Total: {total}</p>
+    <p className="text-right">Total: {total}</p>
     </form>
   );
 };

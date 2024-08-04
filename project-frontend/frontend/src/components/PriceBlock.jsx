@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AbstractSelect from './AbstractSelect';
 
-function PriceBlock(){
+function PriceBlock(props){
 
   const inputSelectPlaceData = [
     {
@@ -9,32 +9,39 @@ function PriceBlock(){
       label: 'Photo studio',
       id: 'place-1',
       name: 'photoshoot',
-      value: 15
+      value: 700
     },
     {
       type: 'radio',
-      label: 'Outdoorss',
+      label: 'Outdoors',
       id: 'place-2',
       name: 'photoshoot',
-      value: 10
+      value: 500
     }
   ]
 
   const inputSelectOptionsData = [
     {
       type: 'checkbox',
-      label: 'Photo studio',
-      id: 'place-1',
+      label: 'With animals',
+      id: 'optional-1',
       name: 'photoshoot',
-      value: 9
+      value: 300
     },
     {
       type: 'checkbox',
-      label: 'Outdoorss',
-      id: 'place-2',
+      label: 'Night time photoshoot',
+      id: 'optional-2',
       name: 'photoshoot',
-      value: 8
-    }
+      value: 400
+    },
+    {
+        type: 'checkbox',
+        label: 'With own merch',
+        id: 'optional-3',
+        name: 'photoshoot',
+        value: 150
+      }
   ]
 
   const inputSelectDurationData = [
@@ -43,54 +50,63 @@ function PriceBlock(){
       label: '1 hour',
       id: 'time-1',
       name: 'photoshoot',
-      value: 1
+      value: 1000
     },
     {
       type: 'radio',
       label: '2 hours',
       id: 'time-2',
       name: 'photoshoot',
-      value: 2
+      value: 2000
     },
     {
       type: 'radio',
       label: '3 hours',
-      id: 'time-2',
+      id: 'time-3',
       name: 'photoshoot',
-      value: 3
+      value: 3000
     }
   ]
   
-  const optionsBlockDataArray = [
+  const [optionsBlockDataArray, setOptionsBlockDataArray] = useState([
     {
-        header: "A",
+        header: "Place of the photoshoot",
         data: inputSelectPlaceData,
-        state: 0
+        state: 0,
+        selected: false
     }, 
     {
-        header: "B",
+        header: "Additional options for the photoshoot",
         data: inputSelectOptionsData,
-        state: 0
+        state: 0,
+        selected: false
     },
     {
-        header: "C",
+        header: "Please select she photoshoot duration",
         data: inputSelectDurationData,
-        state: 0
+        state: 0,
+        selected: false
     }    
-  ];
+  ]);
 
-  const [total, setTotal]=useState(0);
+  const [total, setTotal] = useState(0);
   
-  function handleChildStateChange(index, value) {
-  //    setTotal((prevTotal) => Number(value));
+  async function handleChildStateChange(index, value, sum) {
     optionsBlockDataArray[index].state = value;
-    setTotal(0);
-    let sum = 0;
-    for(index in optionsBlockDataArray){
-      sum += Number(optionsBlockDataArray[index].state);
-      console.log('index', index, 'sum', sum, 'arr value', optionsBlockDataArray[index].state);
+    optionsBlockDataArray[index].selected = true;
+    let checked = true;
+    for(let i in optionsBlockDataArray){
+      sum += Number(optionsBlockDataArray[i].state);
+      if(optionsBlockDataArray[i].selected === false && 
+        optionsBlockDataArray[i].data[i].type === 'radio'){
+           checked = false; 
+      }
     }
     setTotal(Number(sum));
+    if(checked){
+        await props.service(Number(sum));
+        props.activateButton(true);
+    }
   }
 
   return(
@@ -104,7 +120,7 @@ function PriceBlock(){
           changeState={handleChildStateChange} 
         />
       ))}
-      <h1>TOTAL: {total}</h1>
+      <h1 className="text-left m-4">TOTAL: {total}</h1>
     </>
   )
 }

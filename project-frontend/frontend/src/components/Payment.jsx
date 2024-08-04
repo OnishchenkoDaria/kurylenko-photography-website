@@ -2,14 +2,19 @@
 import React, { useEffect, useState } from 'react';
 import userService from '../services/registerForm'
 import DataSelect from './DataTimeSelect'
-import AbstractSelect from './AbstractSelect';
 import PriceBlock from './PriceBlock';
 
 const Payment = () => {
 
+  const [formData, setFormData] = useState(null);
+  const [buttonPressed, setButtonPressed] = useState(false);
+
+  function handleButton (bool) {   
+    setButtonPressed(() => bool);
+  }
+
   //calling axios, setting state to be passed to liqpay
   const fetchHashInfo = async (value) => {
-    console.log(value)
     try {
       const Info = await userService.hash(value);
       const data = Info.data;
@@ -30,7 +35,7 @@ const Payment = () => {
   return (
     <>
 
-      <PriceBlock />
+      <PriceBlock activateButton={handleButton} service={fetchHashInfo} />
 
       {buttonPressed && <form method="POST" action="https://www.liqpay.ua/api/3/checkout" acceptCharset="utf-8">
       <input type="hidden" name="data" value={formData.data}/>
