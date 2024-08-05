@@ -33,24 +33,28 @@ function AbstractSelect(props, {changeState} ) {
   }
     
   return(
-    <form className="w-full max-w-sm pt-6 text-center">
-      <h1 className='mb-3'>{props.header}</h1>
-      {props.data.map((input, index) => (
-        <div key={index} className="text-left m-2">
-          <input
-            type={props.data[index].type}
-            id={props.data[index].id}
-            name={props.data[index].name}
-            value={props.data[index].value}
-            onChange={(event) =>  handleChoice(index, event)}
-          />
-          <label htmlFor={props.data[index].id} className='ml-2'>
-            {props.data[index].label}
-          </label>
-        </div>
-      ))}
-    <p className="text-right">Total: {total}</p>
-    </form>
+    <div className="/*w-8/12*/">
+      <div className="rounded-3xl p-px min-w-80 bg-gray-600/20 border-t-2 border-l-2 border-gray-400/20 shadow-lg mb-4 ml-12 mr-12 leading-loose">
+        <form>
+          <h1 className='text-left text-xl pt-4 pb-2 border-b-2 border-gray-400/20 w-auto inline-block'>{props.header}</h1>
+          {props.data.map((input, index) => (
+            <div key={index} className="text-left ml-6">
+              <input
+                type={props.data[index].type}
+                id={props.data[index].id}
+                name={props.data[index].name}
+                value={props.data[index].value}
+                onChange={(event) =>  handleChoice(index, event)}
+              />
+              <label htmlFor={props.data[index].id} className='ml-3 text-xl'>
+                {props.data[index].label}
+              </label>
+            </div>
+          ))}
+        <p className="text-right text-xl mb-3 mr-6">Total: {total}</p>
+        </form>
+      </div>
+    </div>
   );
 };
 

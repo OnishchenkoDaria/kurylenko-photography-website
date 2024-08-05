@@ -55,6 +55,7 @@ function AbstractForm(props) {
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-neutral-700 mb-3"
               name={props.data[index].name}
+              type={props.data[index].type}
               placeholder={props.data[index].placeholder}
               required={props.data[index].required}
               value = {inputFields[props.data[index].name] || ''}

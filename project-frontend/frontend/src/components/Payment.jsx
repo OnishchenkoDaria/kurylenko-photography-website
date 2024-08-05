@@ -34,15 +34,15 @@ const Payment = () => {
 
   return (
     <>
+      <div className='text-white'>
+        <PriceBlock activateButton={handleButton} service={fetchHashInfo} />
 
-      <PriceBlock activateButton={handleButton} service={fetchHashInfo} />
-
-      {buttonPressed && <form method="POST" action="https://www.liqpay.ua/api/3/checkout" acceptCharset="utf-8">
-      <input type="hidden" name="data" value={formData.data}/>
-      <input type="hidden" name="signature" value={formData.signature}/>
-      <input type="image" src="//static.liqpay.ua/buttons/p1ru.radius.png"/>
-      </form>}
-      
+        {buttonPressed && <form method="POST" action="https://www.liqpay.ua/api/3/checkout" acceptCharset="utf-8">
+        <input type="hidden" name="data" value={formData.data}/>
+        <input type="hidden" name="signature" value={formData.signature}/>
+        <input type="image" src="//static.liqpay.ua/buttons/p1ru.radius.png"/>
+        </form>}
+      </div>
     </>
   );
 };

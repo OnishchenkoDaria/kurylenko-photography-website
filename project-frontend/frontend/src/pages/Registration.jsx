@@ -27,6 +27,7 @@ const Registration = () => {
     },
     {
       name: 'useremail',
+      type: 'email',
       placeholder: 'user@email.com',
       label: 'Email address',
       required: true,
