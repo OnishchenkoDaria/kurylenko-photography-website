@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; 
 
 //make the buttonPressed marker relay on the name of the input 
 
@@ -38,7 +38,7 @@ function AbstractSelect(props, {changeState} ) {
         <form>
           <h1 className='text-left text-xl pt-4 pb-2 border-b-2 border-gray-400/20 w-auto inline-block'>{props.header}</h1>
           {props.data.map((input, index) => (
-            <div key={index} className="text-left ml-6">
+            <div key={index} className="text-left ml-6 accent-amber-600">
               <input
                 type={props.data[index].type}
                 id={props.data[index].id}
@@ -49,6 +49,9 @@ function AbstractSelect(props, {changeState} ) {
               <label htmlFor={props.data[index].id} className='ml-3 text-xl'>
                 {props.data[index].label}
               </label>
+              <p className='text-gray-400/50'>
+                {props.data[index].description}
+              </p>
             </div>
           ))}
         <p className="text-right text-xl mb-3 mr-6">Total: {total}</p>

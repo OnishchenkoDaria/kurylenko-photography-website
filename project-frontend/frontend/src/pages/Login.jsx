@@ -43,10 +43,10 @@ const Login = () => {
   .catch((err)=>console.log('session exist'))
   return (
     <div 
-      className="min-h-screen bg-cover bg-center overflow-hidden" 
+      className="bg-cover bg-center bg-no-repeat bg-fixed min-h-screen" 
       style={{ backgroundImage: `url(${back_pic})` }}
     >
-      <div className="bg-black bg-opacity-50 min-h-screen flex justify-center items-center">
+      <div className="bg-black min-h-screen bg-opacity-50 min-h-screen flex justify-center items-center">
         
         <div className="backdrop-blur-md rounded-lg shadow-xl bg-white/30 p-9 ">
           
