@@ -5,7 +5,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      listStyleImage: {
+        check: 'url("/img/check.svg")',
+      },
+      backgroundImage: {
+        planBasePhoto: 'url("/img/base-plan.png")'
+      }
+    },
   },
   plugins: [],
 }

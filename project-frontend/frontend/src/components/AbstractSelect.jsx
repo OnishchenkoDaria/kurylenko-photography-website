@@ -33,7 +33,7 @@ function AbstractSelect(props, {changeState} ) {
   }
     
   return(
-    <div className="/*w-8/12*/">
+    <div className="">
       <div className="rounded-3xl p-px min-w-80 bg-gray-600/20 border-t-2 border-l-2 border-gray-400/20 shadow-lg mb-4 ml-12 mr-12 leading-loose">
         <form>
           <h1 className='text-left text-xl pt-4 pb-2 border-b-2 border-gray-400/20 w-auto inline-block'>{props.header}</h1>

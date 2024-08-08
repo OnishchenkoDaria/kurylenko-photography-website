@@ -4,7 +4,8 @@ const PathConstants = {
     ACCOUNT: "/account-page",
     LOGIN: "/login",
     PAYMENT: "/payment",
-    BLOG: "/blog"
+    BLOG: "/blog",
+    CUSTOM: "/custom-photoshoot"
 }
 
 export default PathConstants

@@ -167,7 +167,7 @@ function PriceBlock(props){
   }
 
   return(
-    <div className="">
+    <div>
       {optionsBlockDataArray.map((input, index) => (
         <AbstractSelect 
           key={index}
@@ -177,7 +177,7 @@ function PriceBlock(props){
           changeState={handleChildStateChange} 
         />
       ))}
-      <h1 className="text-4xl pt-8 pb-4  w-auto inline-block">TOTAL: {total}</h1>
+      <h1 className="text-4xl pt-8 pb-4 w-auto inline-block">TOTAL: {total}</h1>
     </div>
   )
 }
