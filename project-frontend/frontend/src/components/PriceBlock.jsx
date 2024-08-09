@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import AbstractSelect from './AbstractSelect';
 
 function PriceBlock(props){
@@ -145,23 +145,24 @@ function PriceBlock(props){
         selected: false
     }    
   ]);
-
-  const [total, setTotal] = useState(0);
   
   async function handleChildStateChange(index, value, sum) {
     optionsBlockDataArray[index].state = value;
     optionsBlockDataArray[index].selected = true;
     let checked = true;
+    
     for(let i in optionsBlockDataArray){
       sum += Number(optionsBlockDataArray[i].state);
+      
       if(optionsBlockDataArray[i].selected === false && 
         optionsBlockDataArray[i].data[0].type === 'radio'){
            checked = false; 
       }
     }
-    setTotal(Number(sum));
+
+    props.setTotal(sum);
+
     if(checked){
-        await props.service(Number(sum));
         props.activateButton(true);
     }
   }
@@ -177,7 +178,6 @@ function PriceBlock(props){
           changeState={handleChildStateChange} 
         />
       ))}
-      <h1 className="text-4xl pt-8 pb-4 w-auto inline-block">TOTAL: {total}</h1>
     </div>
   )
 }
