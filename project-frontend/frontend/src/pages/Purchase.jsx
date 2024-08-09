@@ -3,7 +3,6 @@ import PhotoshootPlans from '../components/PhotoshootPlans';
 import PathConstants from '../routes/pathConstants';
 import {Link} from 'react-router-dom';
 
-
 const Purchase = () => {  
   
     /* bg-cover bg-center bg-no-repeat bg-fixed min-h-screen */
@@ -12,6 +11,7 @@ const Purchase = () => {
         name: 'Basic plan',
         description: 'Lorem ipsum dolor sit amet consect etur adipisicing elit. Itaque amet indis perferendis blanditiis repellendus etur quidem assumenda.',
         price: 1500,
+        backgroundImg: 'bg-planBasicPhoto',
         offerings: [
             'Prephotoshoot mood board references',
             'At your location for 1 hour',
@@ -22,6 +22,7 @@ const Purchase = () => {
         name: 'Artistic plan',
         description: 'Lorem ipsum dolor sit amet consect etur adipisicing elit. Itaque amet indis perferendis blanditiis repellendus etur quidem assumenda.',
         price: 2500,
+        backgroundImg: 'bg-planArtisticPhoto',
         offerings: [
             'Phone call ideas brainstorm',
             'Prephotoshoot mood board references',
@@ -35,8 +36,9 @@ const Purchase = () => {
   return (
     <div className='bg-gradient-to-r from-neutral-900 to-amber-800 bg-cover min-h-screen'>
         <div className='flex justify-center items-center flex-col'>
-            <PhotoshootPlans />
-            <PhotoshootPlans />
+            {planData.map((input, index) => (
+                <PhotoshootPlans key={index} data={planData[index]} />
+            ))}
             <p className='text-white text-lg mt-8'>Neither plan is suitable for you?</p>
             <Link to={PathConstants.CUSTOM} className='mt-2 mb-8 text-white/50 border-white/50 border-2 p-2 rounded-md hover:underline hover:text-white hover:border-amber-600/50'>Create custom Photoshoot</Link>
         </div>

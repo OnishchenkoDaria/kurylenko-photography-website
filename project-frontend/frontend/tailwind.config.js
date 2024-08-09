@@ -10,7 +10,8 @@ export default {
         check: 'url("/img/check.svg")',
       },
       backgroundImage: {
-        planBasePhoto: 'url("/img/base-plan.png")'
+        planBasicPhoto: 'url("/img/base-plan.png")',
+        planArtisticPhoto: 'url("/img/artistic-plan.png")'
       }
     },
   },

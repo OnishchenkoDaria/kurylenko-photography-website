@@ -49,21 +49,21 @@ function AbstractForm(props) {
       <form onSubmit={handleFormSubmit} className="w-full max-w-sm pt-6 text-center">
         {props.data.map((input, index) => (     
         <div key={index}>
-          <label className="block text-white tracking-wider mb-2 md:text-left">{props.data[index].label}</label>
+          <label className="block text-white tracking-wider mb-2 md:text-left">{input.label}</label>
 
           <div className="md:flex md:items-center mb-6">
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-neutral-700 mb-3"
-              name={props.data[index].name}
-              type={props.data[index].type}
-              placeholder={props.data[index].placeholder}
-              required={props.data[index].required}
-              value = {inputFields[props.data[index].name] || ''}
+              name={input.name}
+              type={input.type}
+              placeholder={input.placeholder}
+              required={input.required}
+              value = {inputFields[input.name] || ''}
               onChange={event => handleChange(index, event)}
-              autoComplete={props.data[index].autoComplete}
+              autoComplete={input.autoComplete}
             />
 
-          {props.data[index].hasIcon && (
+          {input.hasIcon && (
             <span
               className="flex justify-around items-center"
               onClick = {()=>{
@@ -73,7 +73,7 @@ function AbstractForm(props) {
               }
             }}
             >
-              <Icon className="pl-3 pb-3 text-white" icon={props.data[index].icon} size={25} />
+              <Icon className="pl-3 pb-3 text-white" icon={input.icon} size={25} />
             </span>
           )}
 

@@ -3,6 +3,10 @@ import React, { useEffect, useState } from 'react';
 import userService from '../services/registerForm'
 import DataSelect from './DataTimeSelect'
 import PriceBlock from './PriceBlock';
+import PathConstants from '../routes/pathConstants';
+import {Link} from 'react-router-dom';
+import { Icon } from 'react-icons-kit';
+import { leftArrow } from 'react-icons-kit/feather/arrowLeftCircle';
 
 const Payment = () => {
 
@@ -36,11 +40,12 @@ const Payment = () => {
     <>
       <div className='text-white'>
         <PriceBlock activateButton={handleButton} service={fetchHashInfo} />
+        <Link className='absolute bottom-0 left-0 p-8 hover:underline' to={PathConstants.PAYMENT}>Back</Link>
 
         {buttonPressed && <form method="POST" action="https://www.liqpay.ua/api/3/checkout" acceptCharset="utf-8">
         <input type="hidden" name="data" value={formData.data}/>
         <input type="hidden" name="signature" value={formData.signature}/>
-        <input type="image" src="//static.liqpay.ua/buttons/p1ru.radius.png"/>
+        <button className='bg-amber-700 rounded-md p-2 mb-3 hover:bg-neutral-800'>Buy photoshoot</button>
         </form>}
       </div>
     </>

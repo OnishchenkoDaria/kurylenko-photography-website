@@ -40,17 +40,17 @@ function AbstractSelect(props, {changeState} ) {
           {props.data.map((input, index) => (
             <div key={index} className="text-left ml-6 accent-amber-600">
               <input
-                type={props.data[index].type}
-                id={props.data[index].id}
-                name={props.data[index].name}
-                value={props.data[index].value}
+                type={input.type}
+                id={input.id}
+                name={input.name}
+                value={input.value}
                 onChange={(event) =>  handleChoice(index, event)}
               />
-              <label htmlFor={props.data[index].id} className='ml-3 text-xl'>
-                {props.data[index].label}
+              <label htmlFor={input.id} className='ml-3 text-xl'>
+                {input.label}
               </label>
               <p className='text-gray-400/50'>
-                {props.data[index].description}
+                {input.description}
               </p>
             </div>
           ))}

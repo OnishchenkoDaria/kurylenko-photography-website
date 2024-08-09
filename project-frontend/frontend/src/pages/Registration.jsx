@@ -38,6 +38,7 @@ const Registration = () => {
     },
     {
       name: 'userpassword',
+      type: 'password',
       placeholder: 'password',
       label: 'Password',
       required: true,

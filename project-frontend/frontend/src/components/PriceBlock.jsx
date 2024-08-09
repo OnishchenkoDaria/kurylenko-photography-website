@@ -121,7 +121,7 @@ function PriceBlock(props){
   
   const [optionsBlockDataArray, setOptionsBlockDataArray] = useState([
     {
-        header: " Location",
+        header: "Location",
         data: inputSelectPlaceData,
         state: 0,
         selected: false
@@ -155,7 +155,7 @@ function PriceBlock(props){
     for(let i in optionsBlockDataArray){
       sum += Number(optionsBlockDataArray[i].state);
       if(optionsBlockDataArray[i].selected === false && 
-        optionsBlockDataArray[i].data[i].type === 'radio'){
+        optionsBlockDataArray[i].data[0].type === 'radio'){
            checked = false; 
       }
     }
@@ -172,8 +172,8 @@ function PriceBlock(props){
         <AbstractSelect 
           key={index}
           index={index}
-          data={optionsBlockDataArray[index].data} 
-          header={optionsBlockDataArray[index].header}
+          data={input.data} 
+          header={input.header}
           changeState={handleChildStateChange} 
         />
       ))}
