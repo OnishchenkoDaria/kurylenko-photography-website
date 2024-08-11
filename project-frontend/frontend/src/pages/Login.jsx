@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 //icons
 import { eye } from "react-icons-kit/feather/eye";
 import { mail } from "react-icons-kit/feather/mail";
-
+import { eyeOff } from "react-icons-kit/feather/eyeOff"
 
 const Login = () => {
 
@@ -20,7 +20,6 @@ const Login = () => {
       placeholder: 'user@email.com',
       label: 'Email address',
       required: true,
-      hasIcon: true,
       icon: mail,
       isTogglable: false,
       autoComplete: 'on'
@@ -31,8 +30,8 @@ const Login = () => {
       placeholder: 'password',
       label: 'Password',
       required: true,
-      hasIcon: true,
       icon: eye,
+      disabledIcon: eyeOff,
       isTogglable: true,
       autoComplete: 'off'
     }

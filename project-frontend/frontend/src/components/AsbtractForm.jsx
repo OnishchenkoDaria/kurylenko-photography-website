@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Icon } from "react-icons-kit";
 import userService from "../services/registerForm";
 import { useNavigate } from "react-router-dom";
@@ -6,9 +6,12 @@ import PathConstants from "../routes/pathConstants";
 
 function AbstractForm(props) {
 
-  //console.log(props.data.map(obj => obj.name));
-    const [message, setMessage] = useState();
     const navigate = useNavigate();
+
+    const [message, setMessage] = useState();
+    const [icons, setIcons] = useState(
+      props.data.map(input => input.icon)
+    );
     const [inputFields, setInputFields] = useState(
       [props.data.map(obj => obj.name)]
     );
@@ -17,12 +20,28 @@ function AbstractForm(props) {
       setInputFields({...inputFields, [event.target.name] : event.target.value});
     }
 
+    function handleToggle(index){
+      if(props.data[index].isTogglable){
+        let newIcons = [...icons];
+
+        if(props.data[index].type === "password") {
+          props.data[index].type = "text"; 
+          newIcons[index] = props.data[index].disabledIcon;
+        } else {
+          props.data[index].type = "password";
+          newIcons[index] = props.data[index].icon;
+        }
+          
+        document.getElementById(index).type = props.data[index].type;
+        setIcons(newIcons);
+      }
+    }
+  
     const handleFormSubmit = async (par) => {
       try{
         par.preventDefault();
 
         function newUser(){
-          //props.data.forEact((element) => this.props.data[index].name = formInput.props.data[index].name)
           props.data.forEach((attribute) => {
             this[attribute.name] = inputFields[attribute.name];
           })
@@ -47,12 +66,15 @@ function AbstractForm(props) {
 
     return(
       <form onSubmit={handleFormSubmit} className="w-full max-w-sm pt-6 text-center">
-        {props.data.map((input, index) => (     
+        {props.data.map((input, index) => (
+     
         <div key={index}>
           <label className="block text-white tracking-wider mb-2 md:text-left">{input.label}</label>
 
           <div className="md:flex md:items-center mb-6">
+            
             <input
+              id={index}
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-neutral-700 mb-3"
               name={input.name}
               type={input.type}
@@ -63,19 +85,12 @@ function AbstractForm(props) {
               autoComplete={input.autoComplete}
             />
 
-          {input.hasIcon && (
             <span
               className="flex justify-around items-center"
-              onClick = {()=>{
-                console.log(props.data.isTogglable);
-                if(props.data.isTogglable){
-                  console.log('check');
-              }
-            }}
+              onClick = {() => handleToggle(index)} 
             >
-              <Icon className="pl-3 pb-3 text-white" icon={input.icon} size={25} />
+              <Icon className="pl-3 pb-3 text-white" icon={icons[index]} size={25} />
             </span>
-          )}
 
           </div> 
         </div>

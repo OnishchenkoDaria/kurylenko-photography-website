@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 //icons
 import { eye } from "react-icons-kit/feather/eye";
+import { eyeOff } from "react-icons-kit/feather/eyeOff"
 import { user } from "react-icons-kit/feather/user";
 import { mail } from "react-icons-kit/feather/mail";
 
@@ -20,7 +21,6 @@ const Registration = () => {
       placeholder: 'user name',
       label: 'Name',
       required: true,
-      hasIcon: true,
       icon: user,
       isTogglable: false,
       autoComplete: 'off'
@@ -31,7 +31,6 @@ const Registration = () => {
       placeholder: 'user@email.com',
       label: 'Email address',
       required: true,
-      hasIcon: true,
       icon: mail,
       isTogglable: false,
       autoComplete: 'on'
@@ -42,8 +41,8 @@ const Registration = () => {
       placeholder: 'password',
       label: 'Password',
       required: true,
-      hasIcon: true,
       icon: eye,
+      disabledIcon: eyeOff,
       isTogglable: true,
       autoComplete: 'off'
     }
