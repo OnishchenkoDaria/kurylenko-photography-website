@@ -32,9 +32,9 @@ const SessionButtons = () => {
 
   return (
     <>
-        <div style={{textAlign: 'center'}}>
-        <form onSubmit={checkOut} className="registration-form">
-            <button type='submit' className="submit-button">Log out</button>
+        <div>
+        <form onSubmit={checkOut} className="text-center m-4">
+            <button type='submit' className="border-2 rounded-lg border-amber-500/50 p-2">Log out</button>
         </form>
         </div>
     </>

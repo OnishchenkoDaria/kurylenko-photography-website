@@ -1,28 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import SessionButtons from '../components/SessionCheck';
-import PaymentTable from '../components/PaymentTable';
+import userService from '../services/registerForm';
 import axios from 'axios';
 import PathConstants from '../routes/pathConstants';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import PhotoshootStateCard from '../components/PhotoshootStateCard';
 
 const Account = () => {
-
-  const [hello, setHello] = useState()
+  const [hello, setHello] = useState();
+  const [payments, setPayments] = useState([]);
   
   const navigate = useNavigate();
-  axios.post('http://localhost:3001/users/session-hook')
-  .then((par)=>{
-    const message = 'welcome, '+ par.data; 
-    console.log('welcome', par); 
-    setHello(message)})
-  .catch(() => {
-    navigate(PathConstants.LOGIN)
-  })
-  return(
+
+  useLayoutEffect(() => {
+    const fetchData = async () => {
+      //session check
+      try {
+        const sessionResponse = await axios.post('http://localhost:3001/users/session-hook');
+        const message = 'welcome, ' + sessionResponse.data; 
+        console.log('welcome', sessionResponse); 
+        setHello(message);
+      } catch {
+        navigate(PathConstants.LOGIN);
+      }
+      
+      //payment data reading
+      try {
+        const data = await userService.paymentTable();
+        setPayments(data);
+      } catch (err) {
+        console.log("error occurred: ", err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
     <>
-      <h1 style={{textAlign: 'center'}}>{hello}</h1>
-      <SessionButtons />
-      <PaymentTable />
+      <div className='flex h-full'>
+        <div className=' w-64 '>
+          <h1 className='text-center m-4'>{hello}</h1>
+          <SessionButtons />
+        </div>
+        <div className='bg-neutral-100 shrink w-100'>
+          <p className='p-4 text-neutral-500'>My photoshoots</p>
+          <PhotoshootStateCard data={payments} />
+        </div>
+      </div>
+
+      {/* <PaymentTable /> */}
     </>
   );
 }
