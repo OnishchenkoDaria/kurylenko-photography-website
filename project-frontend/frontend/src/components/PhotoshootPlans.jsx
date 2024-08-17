@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'; 
 import LiqPayCheckOut from './LiqPayCheckOut';
 
 function PhotoshootPlans (props) {

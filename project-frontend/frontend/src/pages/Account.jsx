@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import SessionButtons from '../components/SessionCheck';
 import userService from '../services/registerForm';
 import axios from 'axios';

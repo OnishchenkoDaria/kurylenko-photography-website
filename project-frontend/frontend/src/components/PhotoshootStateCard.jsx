@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-
-function PhotoshootStateCard (props) { 
+function PhotoshootStateCard (props) {
     console.log(props.data);  
     
     return(
