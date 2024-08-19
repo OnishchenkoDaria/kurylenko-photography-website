@@ -21,18 +21,10 @@ const Account = () => {
       } catch {
         navigate(PathConstants.LOGIN);
       }
-      
-      //payment data reading
-      /*try {
-        const data = await userService.paymentTable();
-        setPayments(data);
-      } catch (err) {
-        console.log("error occurred: ", err);
-      }*/
     };
 
     fetchData();
-  }, []);
+  }, [navigate]);
 
   return (
     <>
