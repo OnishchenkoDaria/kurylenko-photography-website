@@ -1,6 +1,5 @@
 import { useState, useLayoutEffect } from 'react';
 import SessionButtons from '../components/SessionCheck';
-import userService from '../services/registerForm';
 import axios from 'axios';
 import PathConstants from '../routes/pathConstants';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +7,7 @@ import PhotoshootStateCard from '../components/PhotoshootStateCard';
 
 const Account = () => {
   const [hello, setHello] = useState();
-  const [payments, setPayments] = useState([]);
+  const [payments] = useState([]);
   
   const navigate = useNavigate();
 
@@ -17,20 +16,19 @@ const Account = () => {
       //session check
       try {
         const sessionResponse = await axios.post('http://localhost:3001/users/session-hook');
-        const message = 'welcome, ' + sessionResponse.data; 
-        console.log('welcome', sessionResponse); 
+        const message = 'welcome, ' + sessionResponse.data;
         setHello(message);
       } catch {
         navigate(PathConstants.LOGIN);
       }
       
       //payment data reading
-      try {
+      /*try {
         const data = await userService.paymentTable();
         setPayments(data);
       } catch (err) {
         console.log("error occurred: ", err);
-      }
+      }*/
     };
 
     fetchData();
@@ -48,8 +46,6 @@ const Account = () => {
           <PhotoshootStateCard data={payments} />
         </div>
       </div>
-
-      {/* <PaymentTable /> */}
     </>
   );
 }
