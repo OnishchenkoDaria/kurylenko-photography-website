@@ -1,7 +1,7 @@
-#The refactoring of the projesct: web aplication
+#The refactoring of the project: web application
 ---
 
-###main task was to optimse the backend of the web application and add the minor changes to frontend functionality for users comfort
+###main task was to optimise the backend of the web application and add the minor changes to frontend functionality for users comfort
 
 ---
 The changes: 
@@ -10,7 +10,7 @@ The changes:
 - Distributed every functionality chuck into separate files with the appropriate unit tests
 - Autorefreshment of the webpage with the orders table;
 - Hidden mode for the password while login;
-- Reolved some logic problems of async functions in registration/hashing
+- Resolved some logic problems of async functions in registration/hashing
 - Async testing and database testing done `(завдання на додаткові бали)`
 - Documentation done
 
