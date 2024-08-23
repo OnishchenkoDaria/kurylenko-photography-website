@@ -4,6 +4,8 @@ const baseUrl = 'http://localhost:3001/users/'
 axios.defaults.withCredentials = true; // Include credentials (like cookies) in the request
 axios.defaults.crossDomain = true; // Enable cross-domain requests
 
+//TO DO: write custom error handling middleware (catch block)
+
 const addUser = async (newUser) => {
     const result = axios.post(baseUrl+'add', newUser)
     const feedback = {success:'',message:''}
@@ -121,12 +123,11 @@ const hash = async(value) => {
     }
 }
 
-const paymentTable = async() => {
+const getUserOrders = async() => {
     const result = await axios.post(baseUrl+'get-table')
     try{
-        console.log(result.data)
-        return result.data
-        
+        console.log('orders: ', result.data.orders);
+        return result.data.orders;
     } catch(error){
         if (error.response){
             console.error('server send back an error status:', error.response.status);
@@ -148,5 +149,5 @@ export default{
     getRole: getRole,
     logOut: logOut,
     hash: hash,
-    paymentTable: paymentTable
+    getUserOrders: getUserOrders
 }

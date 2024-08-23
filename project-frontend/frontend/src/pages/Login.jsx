@@ -41,7 +41,7 @@ const Login = () => {
   .then(()=> {
     navigate(PathConstants.ACCOUNT);
   })
-  .catch((err)=>console.log('session exist', err))
+  .catch((err)=>console.log('session does not exist', err))
 
   return (
     <div 

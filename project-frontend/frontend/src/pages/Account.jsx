@@ -4,10 +4,11 @@ import axios from 'axios';
 import PathConstants from '../routes/pathConstants';
 import { useNavigate } from 'react-router-dom';
 import PhotoshootStateCard from '../components/PhotoshootStateCard';
+import UserService from '../services/registerForm.js';
 
 const Account = () => {
   const [hello, setHello] = useState();
-  const [payments] = useState([]);
+  const [orders, setOrders] = useState([]);
   
   const navigate = useNavigate();
 
@@ -20,6 +21,14 @@ const Account = () => {
         setHello(message);
       } catch {
         navigate(PathConstants.LOGIN);
+      }
+
+      //getting user's orders data
+      try{
+        const ordersData = await UserService.getUserOrders();
+        setOrders(ordersData);
+      } catch(err){
+        console.log('error fetching orders data: ', err);
       }
     };
 
@@ -35,7 +44,7 @@ const Account = () => {
         </div>
         <div className='bg-neutral-100 shrink w-100'>
           <p className='p-4 text-neutral-500'>My photoshoots</p>
-          <PhotoshootStateCard data={payments} />
+          <PhotoshootStateCard data={orders} />
         </div>
       </div>
     </>
