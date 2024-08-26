@@ -19,6 +19,8 @@ const PostDisplayBlog = () => {
     getPosts();
   }, [posts]);
 
+  console.log(posts);
+
   return (
     <Container lg={8} fluid="md">
       {posts.length > 0 && (
@@ -26,7 +28,9 @@ const PostDisplayBlog = () => {
             {posts.map((post, index) => {
               return (
                   <Col sm={6} lg={4} key={index}>
-                    <PostCard id={post.id} />
+                    {console.log(post._id.toString())}
+                    {console.log(post)}
+                    <PostCard id={post._id.toString()} />
                   </Col>
               );
             })}

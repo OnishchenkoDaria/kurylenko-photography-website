@@ -36,6 +36,8 @@ const PostDisplayMain = () => {
     return <div style={{marginTop: '40px', textAlign: 'center'}}>No posts yet</div>
   }
 
+  //console.log(posts);
+
   return (
     <Container className="my-4">
       <Row className="d-flex justify-content-center">
@@ -43,7 +45,7 @@ const PostDisplayMain = () => {
           <Col sm={12} md={4} key={index}>
             {post && (
               <Post
-                id={post.id}
+                /*id={post.id}*/
                 imageURL={post.imageURL}
                 title={post.title}
                 content={post.content}
