@@ -13,13 +13,17 @@ const PostEditModal = ({ id }) => {
 
   useEffect(() => {
     const getPostData = async () => {
-      const post = await postService.getPost(id);
-      if (post && post.length > 0) {
-        setPostData({
-          title: post[0].title,
-          content: post[0].content,
-          imageURL: post[0].imageURL,
-        });
+      try {
+        const post = await postService.getPost(id);
+        if (post) {
+          setPostData({
+            title: post.title,
+            content: post.content,
+            imageURL: post.imageURL,
+          });
+        }
+      } catch(err){
+        console.log(err);
       }
     };
     getPostData();
@@ -35,19 +39,16 @@ const PostEditModal = ({ id }) => {
     });
   };
 
-  const handleSubmit = (event) => {
-    // Preventing page reloading
-    event.preventDefault();
+  const handleSubmit = async(event) => {
+    try {
+      // Preventing page reloading
+      event.preventDefault();
+      await postService.updatePost(id, postData);
 
-    // Creating object
-    const newPost = new FormData();
-    newPost.set("title", postData.title);
-    newPost.set("content", postData.content);
-    // Sending object to the server
-    const updatePost = async () => {
-      await postService.updatePost(id, newPost);
-    };
-    updatePost();
+    } catch(err){
+      console.log(err);
+    }
+
 
     // Clearing up
     setPostData({

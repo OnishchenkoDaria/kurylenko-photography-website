@@ -28,8 +28,6 @@ const PostDisplayBlog = () => {
             {posts.map((post, index) => {
               return (
                   <Col sm={6} lg={4} key={index}>
-                    {console.log(post._id.toString())}
-                    {console.log(post)}
                     <PostCard id={post._id.toString()} />
                   </Col>
               );

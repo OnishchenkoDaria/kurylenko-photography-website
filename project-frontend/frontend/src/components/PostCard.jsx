@@ -16,12 +16,11 @@ const PostCard = ({ id }) => {
   });
   const [isAdmin, setIsAdmin] = useState(false);
 
-  useEffect(async() => {
+  useEffect(() => {
 
     const updateData = async () => {
       try {
         const post = await postService.getPost(id);
-        console.log(post);
         if (post) {
           setPostData({
             title: post.title,
@@ -37,7 +36,7 @@ const PostCard = ({ id }) => {
       }
     };
     updateData();
-  }, [id]);
+  },[postData]);
 
   const handleDelete = () => {
     //postService.deletePost(id);
@@ -67,7 +66,7 @@ const PostCard = ({ id }) => {
         </Card.Body>
         <Card.Footer>
           <PostShowModal id={id} />
-          {/*{isAdmin && (
+          {isAdmin && (
             <>
               <Button variant="dark" onClick={handleDelete} className="mx-2">
                 <svg
@@ -83,7 +82,7 @@ const PostCard = ({ id }) => {
               </Button>
               <PostEditModal id={id} />
             </>
-          )}*/}
+          )}
         </Card.Footer>
       </Card.ImgOverlay>
     </Card>
