@@ -38,8 +38,13 @@ const PostCard = ({ id }) => {
     updateData();
   },[postData]);
 
-  const handleDelete = () => {
-    //postService.deletePost(id);
+  const handleDelete = async() => {
+    try {
+      await postService.deletePost(id);
+      console.log('deleted ', id);
+    } catch(err){
+      console.log('error deleting post');
+    }
   };
 
   return (

@@ -19,8 +19,6 @@ const PostDisplayBlog = () => {
     getPosts();
   }, [posts]);
 
-  console.log(posts);
-
   return (
     <Container lg={8} fluid="md">
       {posts.length > 0 && (

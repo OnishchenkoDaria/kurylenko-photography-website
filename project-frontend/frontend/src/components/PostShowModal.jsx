@@ -9,7 +9,6 @@ import postService from "../services/posts";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const PostShowModal = ({ id }) => {
-  console.log(id);
   const [show, setShow] = useState(false);
   const [postData, setPostData] = useState({
     title: "",

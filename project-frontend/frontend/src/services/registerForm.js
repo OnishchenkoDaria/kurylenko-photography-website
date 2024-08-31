@@ -81,7 +81,7 @@ const getRole = async() => {
         return role
     }
     catch(error){
-        console.error('Get Role error: ', error)
+        console.log('Get Role error: ', error)
     }
 }
 
