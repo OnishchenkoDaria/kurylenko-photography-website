@@ -1,4 +1,3 @@
-import React from "react";
 import AbstractForm from "../components/AsbtractForm"
 import axios from 'axios';
 import PathConstants from '../routes/pathConstants';
@@ -39,14 +38,17 @@ const Login = () => {
   
   const navigate = useNavigate();
   axios.post('http://localhost:3001/users/session-hook')
-  .then(()=>navigate(PathConstants.ACCOUNT))
-  .catch((err)=>console.log('session exist'))
+  .then(()=> {
+    navigate(PathConstants.ACCOUNT);
+  })
+  .catch((err)=>console.log('session does not exist', err))
+
   return (
     <div 
       className="bg-cover bg-center bg-no-repeat bg-fixed min-h-screen" 
       style={{ backgroundImage: `url(${back_pic})` }}
     >
-      <div className="bg-black min-h-screen bg-opacity-50 min-h-screen flex justify-center items-center">
+      <div className="bg-black min-h-screen bg-opacity-50 flex justify-center items-center">
         
         <div className="backdrop-blur-md rounded-lg shadow-xl bg-white/30 p-9 ">
           

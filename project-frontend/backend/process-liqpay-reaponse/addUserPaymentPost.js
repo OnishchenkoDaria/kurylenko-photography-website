@@ -1,17 +1,18 @@
 const {setTimeDate} = require('../set-time/setTimeDate');
-const {pool} = require('../database/db');
+const User = require('../models/User');
 
-function AddUserPayment(user_email, price) {
+async function AddUserPayment(user_email, price, res) {
     const Today = setTimeDate();
-    console.log(Today);
-    const post = {price: price, email:user_email, date: Today};
-    const sql = `INSERT INTO orders SET ?`;
-    pool.query(sql,post, (err)=>{
-        if (err) {
-            console.error("error: ", err);
-        }
-        console.log('payment added!');
-    })
+    const data = {price: price, date: Today, status: 'payed'};
+
+    try{
+        await User.findOneAndUpdate({email:user_email}, {$push: {orders: data}}, {new: true});
+
+        return res.status(200).json({ message: 'order record added successfully' });
+    } catch (err){
+        console.log(err);
+        return res.status(500).json({error: 'error adding order record to user' });
+    }
 }
 
-module.exports = AddUserPayment
+module.exports = AddUserPayment;

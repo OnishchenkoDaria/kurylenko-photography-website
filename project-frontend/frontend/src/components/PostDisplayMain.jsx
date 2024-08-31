@@ -36,6 +36,8 @@ const PostDisplayMain = () => {
     return <div style={{marginTop: '40px', textAlign: 'center'}}>No posts yet</div>
   }
 
+  //console.log(posts);
+
   return (
     <Container className="my-4">
       <Row className="d-flex justify-content-center">

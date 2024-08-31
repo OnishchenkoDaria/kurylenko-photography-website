@@ -1,8 +1,10 @@
+//setting server
 const express = require('express');
 const app = express();
+
+//documentation
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
-const basicAuth = require('express-basic-auth');
 
 const cors = require('cors');
 app.use(cors({
@@ -12,13 +14,14 @@ app.use(cors({
     allowedHeaders: 'Content-Type, *',  // allow specified headers
   }));
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+
 const postRouter = require('./routes/posts.js');
-const registerRouter = require('./routes/register.js');
+const registerRouter = require('./routes/register.js')
 
 app.use('/api/posts', postRouter);
 app.use('/users', registerRouter);
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json())
 
 const options = {
     swaggerDefinition: {
@@ -51,36 +54,37 @@ const options = {
     };
     
 const swaggerSpecs = swaggerJsdoc(options);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
+app.use('/apo9i-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
 
 const keys = require('./be-keys');
 const private_key = keys.private;
 const crypto = require('crypto');
 
-app.post('/', (req,res)=> {   
-    const Recieved = req.body
-    //console.log(JSON.stringify(Recieved))
-    const dataRecieved = Recieved.data
-    //console.log('dataRecieved: ' , dataRecieved)
-    const signatureRecieved = Recieved.signature
-    //console.log('signatureRecieved: ' , signatureRecieved)
-    const jsonString = private_key + dataRecieved + private_key
-    //console.log(jsonString)
-    const sha1 = crypto.createHash('sha1').update(jsonString).digest('bin')
-   // console.log(sha1)
-    const signatureCreated = Buffer.from(sha1).toString('base64')
-   // console.log(signatureCreated)
-    if(signatureCreated === signatureRecieved){
-        const decodedString = Buffer.from(dataRecieved, 'base64').toString('utf-8')
-        console.log("decoded: " , decodedString)
-        const obj = JSON.parse(decodedString)
-        const status = obj.status
-        console.log(status)
+/*//dealing with unknown endpoint
+const unknownEndpoint = (request, response) => {
+    response.status(404).send({ error: 'unknown endpoint' })
+}*/
+
+app.post('/', async (req,res)=> {
+    const Received = req.body;
+    const dataReceived = Received.data;
+    const signatureReceived = Received.signature;
+
+    const jsonString = private_key + dataReceived + private_key;
+    const sha1 = crypto.createHash('sha1').update(jsonString).digest('bin');
+    const signatureCreated = Buffer.from(sha1).toString('base64');
+
+    if(signatureCreated === signatureReceived){
+        const decodedString = Buffer.from(dataReceived, 'base64').toString('utf-8');
+
+        const obj = JSON.parse(decodedString);
+        const status = obj.status;
+        console.log(status);
+
         if(status === 'success'){
             console.log('executed success')
             const price = obj.amount
-            registerRouter.addPayment(price)
-            return res.status(200).json({ message: 'payment successful' })
+            await registerRouter.addPayment(price, res);
         }
         else if(status === 'error'){
             console.log('executed error')
@@ -106,7 +110,26 @@ app.get('/', (req,res)=> {
     res.send("hi get")
 })
 
-const PORT = 3001
+//for unknown endpoint
+const unknownEndpoint = (req, res) => {
+    res.status(404).json({ error: 'unknown endpoint' })
+}
+
+app.use(unknownEndpoint);
+
+const errorHandler = (err, req, res, next) => {
+    console.error(err.message)
+
+    if (err.name === 'CastError') {
+        return res.status(400).json({ error: 'invalid mongo db object id' })
+    }
+
+    next(err);
+}
+
+app.use(errorHandler);
+
+const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })

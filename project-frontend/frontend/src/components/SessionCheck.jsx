@@ -9,25 +9,18 @@ const SessionButtons = () => {
   //пфсля оновлення видає інфу про юзера що зарегався до цього
   //навіть після перелогіну - видає логін вже новозалогіненого юзера
   //після connection break із сервером (xampp) всі дані щезають
-  const checkUser = async() => {
+
+    /*const checkUser = async() => {
     console.log('summoned')
-    await userService.getUser()
-  }
+    //await userService.getUser()
+  }*/
 
   const checkOut = async() => {
-    try{
-        console.log('logging out')
-        const success = await userService.logOut()
-        if(success){
-            console.log('success')
-            navigate(PathConstants.HOME)
-            console.log('navigate executed')
-        }
-    }
-    catch(err){
-        throw err
-    }
-      
+      const success = await userService.logOut()
+      if(success){
+          console.log('successfully logged out');
+          navigate(PathConstants.HOME)
+      }
   }
 
   return (

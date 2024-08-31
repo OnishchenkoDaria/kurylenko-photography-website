@@ -7,8 +7,8 @@ const getAllPosts = async () => axios.get(baseUrl).then(response => response.dat
 
 const createPost = async (newPost) => axios.post(baseUrl, newPost).then(response => response.data)
 
-const deletePost = async (id) => axios.delete(baseUrl + `/${id}`).then(response => response.data)
+const deletePost = async (id) => axios.delete(baseUrl + `/delete/${id}`).then(response => response.data)
 
-const updatePost = async (id, newPost) => axios.patch(baseUrl + `/${id}`, newPost).then(response => response.data)
+const updatePost = async (id, newPost) => axios.put(baseUrl + `/update/${id}`, newPost).then(response => response.data)
 
 export default { getPost, getAllPosts, createPost, deletePost, updatePost }

@@ -17,22 +17,34 @@ const PostCard = ({ id }) => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
+
     const updateData = async () => {
-      const post = await postService.getPost(id);
-      if (post && post.length > 0) {
-        setPostData({
-          title: post[0].title,
-          content: post[0].content,
-          imageURL: post[0].imageURL,
-        });
+      try {
+        const post = await postService.getPost(id);
+        if (post) {
+          setPostData({
+            title: post.title,
+            content: post.content,
+            imageURL: post.imageURL,
+          });
+        }
+
+        const role = await registerService.getRole();
+        setIsAdmin(role === "admin");
+      } catch (error) {
+        console.error("Error fetching post data or role:", error);
       }
-      setIsAdmin((await registerService.getRole()) === "admin");
     };
     updateData();
-  });
+  },[postData]);
 
-  const handleDelete = () => {
-    postService.deletePost(id);
+  const handleDelete = async() => {
+    try {
+      await postService.deletePost(id);
+      console.log('deleted ', id);
+    } catch(err){
+      console.log('error deleting post');
+    }
   };
 
   return (

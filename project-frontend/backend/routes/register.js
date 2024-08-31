@@ -1,26 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const sessions = require('express-session');
-
-//header("Access-Control-Allow-Origin: http://localhost:5173");
-//creating our mysql database + connecting it with node (next function)
-
-const {pool, createUserTable, createOrdersTable, insertAdminByDefault} = require('../database/db');
-
-
-//users table creation
-createUserTable(pool);
-
-//orders table creation
-createOrdersTable(pool);
-
-//credentials data is no longer used in router (used locally in functions)
-insertAdminByDefault(pool);
 
 const registerRouter = express.Router();
 
-//session implementation
 const crypto = require('crypto');
 
 const generateSecretKey = () => {
@@ -43,7 +26,7 @@ registerRouter.use(express.urlencoded({ extended: true }));
 
 registerRouter.use(bodyParser.json());
 
-//handling user regestration
+//handling user registration
 const RegisterNewUser = require('../register-user/registerPost');
 
 /**
@@ -122,6 +105,15 @@ registerRouter.post('/log-in', (req,res) => {
     LoginUser(req, res);
 });
 
+registerRouter.get('/user', (req, res) => {
+    if(req.session){
+        return res.status(201).json(req.session);
+    }
+    else{
+        return res.status(409).json({ error: 'not session created' });
+    }
+})
+
 //handles the session check
 const SessionHookControl = require('../session-hook/sessionHookPost')
 /**
@@ -192,7 +184,7 @@ registerRouter.post('/session-hook', (req, res) => {
  *                                  description: Error text                      
  */
 
-//to tiny to do it outer - remains in router
+//too tiny to do it outer - remains in router
 //handles the role check --- for posts
 registerRouter.get('/get-role', (req, res) => {
     const role = req.session.role
@@ -271,12 +263,12 @@ const AddUserPayment = require('../process-liqpay-reaponse/addUserPaymentPost');
  *       500:
  *         description: Server error.
  */
-registerRouter.addPayment = (price) => {
-    AddUserPayment(user_email, price);
+registerRouter.addPayment = (price, req, res) => {
+    AddUserPayment(user_email, price, req, res);
 };
 
 //handles active users all payments table data print
-const getUserTable = require('../users-payments-table/getTablePost');
+const getUserTable = require('../users-payments-table/getUserOrdersPost');
 
 /**
  * @swagger

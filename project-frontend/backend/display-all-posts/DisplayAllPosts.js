@@ -1,14 +1,14 @@
-const {pool} = require('../database/db');
+const Post = require('../models/Post');
 
-function DisaplayAllPosts(request, response) {
-    const query = `SELECT * FROM posts ORDER BY id DESC`
-    pool.query(query, (err, result) => {
-        if (err) {
-            response.status(500).send(`Can't get this post`)
-            console.error('Error in GET:', err)
-        }
-        else response.json(result)
-    })
+async function DisplayAllPosts(request, response) {
+
+    try{
+        const posts = await Post.find({});
+        response.json(posts);
+    } catch(err){
+        console.log(err);
+        response.status(500).send(`post records not found`);
+    }
 }
 
-module.exports = DisaplayAllPosts;
+module.exports = DisplayAllPosts;
