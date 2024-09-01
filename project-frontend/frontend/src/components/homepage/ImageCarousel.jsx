@@ -5,11 +5,11 @@ import Carousel from "react-bootstrap/Carousel";
 import Image from "react-bootstrap/Image";
 import Ratio from "react-bootstrap/Ratio";
 import "bootstrap/dist/css/bootstrap.min.css";
-import photo1 from "../assets/photo1.jpg"
-import photo2 from "../assets/photo2.jpg"
-import photo3 from "../assets/photo3.jpg"
-import photo4 from "../assets/photo4.jpg"
-import photo5 from "../assets/photo5.jpg"
+import photo1 from "../../assets/photo1.jpg"
+import photo2 from "../../assets/photo2.jpg"
+import photo3 from "../../assets/photo3.jpg"
+import photo4 from "../../assets/photo4.jpg"
+import photo5 from "../../assets/photo5.jpg"
 
 const TextWithBackground = ({ text }) => {
   return (

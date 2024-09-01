@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import postService from "../services/posts.js";
+import postService from "../../services/posts.js";
 
 const PostEditModal = ({ id }) => {
   const [show, setShow] = useState(false);

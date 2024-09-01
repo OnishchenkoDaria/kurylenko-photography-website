@@ -5,7 +5,7 @@ import Ratio from "react-bootstrap/Ratio";
 import Image from "react-bootstrap/Image";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import postService from "../services/posts";
+import postService from "../../services/posts.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const PostShowModal = ({ id }) => {

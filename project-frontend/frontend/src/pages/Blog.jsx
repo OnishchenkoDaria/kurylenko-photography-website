@@ -1,5 +1,5 @@
 import React from 'react';
-import PostDisplayBlog from '../components/PostDispalyBlog.jsx';
+import PostDisplayBlog from '../components/blog/PostDispalyBlog.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 

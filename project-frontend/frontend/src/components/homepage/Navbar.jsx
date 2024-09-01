@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {Link} from "react-router-dom"
-import PathConstants from "../routes/pathConstants";
+import PathConstants from "../../routes/pathConstants.js";
 
 const Navbar = () => {
     const [menuVisible, setMenuVisible] = useState(false);

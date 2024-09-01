@@ -3,8 +3,8 @@ import { format } from "fecha";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import postService from "../services/posts.js";
-import registerService from "../services/registerForm.js";
+import postService from "../../services/posts.js";
+import registerService from "../../services/registerForm.js";
 
 const PostCreate = () => {
   const [show, setShow] = useState(false);

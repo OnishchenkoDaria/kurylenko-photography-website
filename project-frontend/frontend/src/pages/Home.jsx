@@ -1,9 +1,9 @@
 import React from "react";
-import PostDisplayMain from "../components/PostDisplayMain.jsx";
-import HomeHeader from "../components/HomeHeader.jsx";
-import PhotographerExperience from "../components/PhotographerExperience";
-import PostCreate from "../components/PostCreate.jsx";
-import ImageCarousel from "../components/ImageCarousel.jsx";
+import PostDisplayMain from "../components/blog/PostDisplayMain.jsx";
+import HomeHeader from "../components/homepage/HomeHeader.jsx";
+import PhotographerExperience from "../components/homepage/PhotographerExperience.jsx";
+import PostCreate from "../components/blog/PostCreate.jsx";
+import ImageCarousel from "../components/homepage/ImageCarousel.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Row from 'react-bootstrap/Row';

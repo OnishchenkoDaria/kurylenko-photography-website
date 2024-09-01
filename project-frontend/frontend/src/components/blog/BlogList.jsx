@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import "../styles/BlogList.css"
+import "../../styles/BlogList.css"
 import Modal from "react-modal";
 import axios from "axios";
 import { format } from 'fecha'

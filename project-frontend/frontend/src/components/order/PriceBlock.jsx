@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AbstractSelect from './AbstractSelect';
+import AbstractSelect from '../AbstractSelect.jsx';
 
 function PriceBlock(props){
 

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import PriceBlock from './PriceBlock';
-import PathConstants from '../routes/pathConstants';
+import PriceBlock from './PriceBlock.jsx';
+import PathConstants from '../../routes/pathConstants.js';
 import { Link } from 'react-router-dom';
-import LiqPayCheckOut from './LiqPayCheckOut';
+import LiqPayCheckOut from './LiqPayCheckOut.jsx';
 
 const Payment = () => {
 

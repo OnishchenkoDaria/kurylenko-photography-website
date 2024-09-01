@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Ratio from "react-bootstrap/Ratio";
 import Button from "react-bootstrap/Button";
-import PostShowModal from "./PostShowModal";
+import PostShowModal from "./PostShowModal.jsx";
 import PostEditModal from "./PostEditModal.jsx";
-import postService from "../services/posts.js";
-import registerService from "../services/registerForm.js";
+import postService from "../../services/posts.js";
+import registerService from "../../services/registerForm.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const PostCard = ({ id }) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../styles/PhotographerExperience.css'; // Підключаємо стилі для компонента
+import '../../styles/PhotographerExperience.css'; // Підключаємо стилі для компонента
 
 const PhotographerExperience = () => {
     return (

@@ -4,8 +4,8 @@ import Card from "react-bootstrap/Card";
 import Ratio from "react-bootstrap/Ratio";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import PostShowModal from "./PostShowModal";
-import postService from "../services/posts";
+import PostShowModal from "./PostShowModal.jsx";
+import postService from "../../services/posts.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Post = ({ id, imageURL, title }) => {

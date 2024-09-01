@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Suspense } from "react";
-import NavbarHeader from "./NavbarHeader";
+import NavbarHeader from "../homepage/NavbarHeader.jsx";
 
 export default function Layout() {
   return (

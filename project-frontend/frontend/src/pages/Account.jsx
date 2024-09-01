@@ -1,9 +1,9 @@
 import { useState, useLayoutEffect } from 'react';
-import SessionButtons from '../components/SessionCheck';
+import SessionButtons from '../components/account/SessionButton.jsx';
 import axios from 'axios';
 import PathConstants from '../routes/pathConstants';
 import { useNavigate } from 'react-router-dom';
-import PhotoshootStateCard from '../components/PhotoshootStateCard';
+import PhotoshootStateCard from '../components/account/PhotoshootStateCard.jsx';
 import UserService from '../services/registerForm.js';
 
 const Account = () => {

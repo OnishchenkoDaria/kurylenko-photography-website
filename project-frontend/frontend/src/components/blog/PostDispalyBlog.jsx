@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import PostCard from "./PostCard";
-import postService from "../services/posts";
-import "../styles/PostCreateModal.css";
+import PostCard from "./PostCard.jsx";
+import postService from "../../services/posts.js";
+import "../../styles/PostCreateModal.css";
 
 const PostDisplayBlog = () => {
   const [posts, setPosts] = useState([]);

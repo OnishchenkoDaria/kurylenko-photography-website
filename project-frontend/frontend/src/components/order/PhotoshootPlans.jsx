@@ -1,4 +1,4 @@
-import LiqPayCheckOut from './LiqPayCheckOut';
+import LiqPayCheckOut from './LiqPayCheckOut.jsx';
 
 function PhotoshootPlans (props) {
     

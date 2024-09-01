@@ -1,5 +1,5 @@
 import React from 'react';
-import Payment from '../components/Payment';
+import Payment from '../components/order/Payment.jsx';
 import back_pic from '../assets/photo5.jpg';
 import axios from 'axios';
 import PathConstants from '../routes/pathConstants';

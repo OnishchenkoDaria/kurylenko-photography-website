@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'; 
-import userService from '../services/registerForm';
+import userService from '../../services/registerForm.js';
 
 /*
     <LiqPayCheckOut type="auto/button" price={...} />
