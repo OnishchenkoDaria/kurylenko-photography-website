@@ -143,11 +143,5 @@ const getUserOrders = async() => {
 }
 
 export default{
-    addUser: addUser,
-    loginUser: loginUser,
-    getUser: getUser,
-    getRole: getRole,
-    logOut: logOut,
-    hash: hash,
-    getUserOrders: getUserOrders
+    addUser, loginUser, getUser, getRole, logOut, hash, getUserOrders
 }

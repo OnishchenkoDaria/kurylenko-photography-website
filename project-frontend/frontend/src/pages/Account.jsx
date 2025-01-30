@@ -17,8 +17,8 @@ const Account = () => {
       //session check
       try {
         const sessionResponse = await axios.post('http://localhost:3001/users/session-hook');
-        const message = 'welcome, ' + sessionResponse.data;
-        setHello(message);
+        //const message = 'welcome, ' + sessionResponse.data;
+        setHello(sessionResponse.data);
       } catch {
         navigate(PathConstants.LOGIN);
       }
@@ -39,7 +39,7 @@ const Account = () => {
     <>
       <div className='flex h-full'>
         <div className=' w-64 '>
-          <h1 className='text-center m-4'>{hello}</h1>
+          <h1 className='text-center m-4'>welcome, {hello}</h1>
           <SessionButtons />
         </div>
         <div className='bg-neutral-100 shrink w-100'>
